@@ -7,6 +7,7 @@ import Point from '../models/Point';
  * @access Public
  */
 export async function getStores(req: Request, res: Response, next: NextFunction) {
+  console.log(req.query);
   try {
     const stores = await Point.find();
     return res.status(200).json({
