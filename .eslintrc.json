@@ -23,7 +23,16 @@
     "no-console": "off",
     "@typescript-eslint/no-console": "off",
     "func-names": "off",
-    "@typescript-eslint/func-names": "off"
+    "@typescript-eslint/func-names": "off",
+    "import/extensions": [
+      "error",
+      {
+        "js": "never",
+        "ts": "never",
+        "jsx": "never",
+        "tsx": "never"
+      }
+    ]
   },
   "settings": {
     "import/resolver": {

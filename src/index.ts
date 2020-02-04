@@ -12,8 +12,9 @@ const app: Application = express();
 // Error Handling
 app.use(errorMiddleware);
 app.use(function(req: Request, res: Response, next: NextFunction) {
-  const error: Error = new Error('Not Found');
+  const error: Error = new Error();
   (error as any).status = 404;
+  error.message = 'Not Found';
   next(error);
 });
 
