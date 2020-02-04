@@ -5,7 +5,7 @@ export interface IPoint {
   description: string;
   filters: IFilter;
   location: ILocation;
-  navigation: ISegment;
+  navigation: ISegments;
   properties: IProperty;
 }
 
@@ -34,11 +34,11 @@ type ILocationProperty = {
   shopCenterPoint: number[];
 };
 
-type ISegment = {
-  segments: ISingleSegment[];
+type ISegments = {
+  segments: ISegment[];
 };
 
-type ISingleSegment = {
+type ISegment = {
   id: string;
   weight: number;
   mapWeight: number;
