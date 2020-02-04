@@ -3,6 +3,7 @@ import * as dotenv from 'dotenv';
 import * as path from 'path';
 import { errorMiddleware } from './middleware/error';
 import connectDB from './models';
+import storeRoutes from './routes/stores';
 
 // Config
 dotenv.config({ path: path.resolve(__dirname, '../config/config.env') });
@@ -12,6 +13,9 @@ const app: Application = express();
 
 // Init DB
 connectDB();
+
+// Routes
+app.use('/api/stores', storeRoutes);
 
 // Error Handling
 app.use(errorMiddleware);
