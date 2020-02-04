@@ -3,13 +3,21 @@ import { IPointModel } from '../interfaces/IPoint';
 import { segmentSchema } from './Segment';
 
 const pointSchema: mongoose.Schema<IPointModel> = new mongoose.Schema<IPointModel>({
+  id: {
+    type: String,
+    required: [true, 'Id field is required'],
+    unique: true,
+  },
   title: {
     type: String,
     required: [true, 'Title field is required'],
+    trim: true,
+    maxlength: [100, 'Max title length is 100 chars'],
   },
   description: {
     type: String,
     required: [true, 'Description field is required'],
+    trim: true,
   },
   filters: {
     pointType: [String],
