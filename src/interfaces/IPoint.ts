@@ -14,36 +14,36 @@ export interface IPointModel extends IPoint, Document {
   dateCreated: Date;
 }
 
-type IFilter = {
+export type IFilter = {
   pointType: string[];
 };
 
-type ILocation = {
+export type ILocation = {
   type: string;
   geometry: IGeometry;
   properties: ILocationProperty;
 };
 
-type IGeometry = {
+export type IGeometry = {
   type: string;
   coordinates: number[];
 };
 
-type ILocationProperty = {
+export type ILocationProperty = {
   floorLevel: number;
   shopCenterPoint: number[];
 };
 
-type ISegments = {
+export type ISegments = {
   segments: ISegment[];
 };
 
-type ISegment = {
+export type ISegment = {
   id: string;
   weight: number;
   mapWeight: number;
 };
 
-type IProperty = {
+export type IProperty = {
   isVisibleOnList: boolean;
 };
