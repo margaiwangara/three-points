@@ -1,5 +1,6 @@
 {
   "extends": [
+    "eslint:recommended",
     "airbnb",
     "prettier",
     "prettier/@typescript-eslint",
@@ -14,7 +15,7 @@
     "project": "./tsconfig.json",
     "tsconfigRootDir": "."
   },
-  "plugins": ["@typescript-eslint", "prettier", "import"],
+  "plugins": ["@typescript-eslint", "prettier", "import", "jsx-a11y"],
   "rules": {
     "prettier/prettier": "error",
     "no-unused-vars": "warn",
@@ -25,8 +26,10 @@
     "@typescript-eslint/func-names": "off"
   },
   "settings": {
-    "node": {
-      "extensions": [".js", ".ts"]
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".ts", ".tsx", ".jsx"]
+      }
     }
   }
 }
