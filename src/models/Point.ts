@@ -36,10 +36,10 @@ const pointSchema: mongoose.Schema<IPointModel> = new mongoose.Schema<IPointMode
         type: [Number],
         index: '2dsphere',
       },
-      properties: {
-        floorLevel: Number,
-        shopCenterPoint: [Number],
-      },
+    },
+    properties: {
+      floorLevel: Number,
+      shopCenterPoint: [Number],
     },
   },
   navigation: {
@@ -48,7 +48,7 @@ const pointSchema: mongoose.Schema<IPointModel> = new mongoose.Schema<IPointMode
   properties: {
     isVisibleOnList: {
       type: Boolean,
-      required: [true, 'Properties Visibility field is required'],
+      default: false,
     },
   },
 });

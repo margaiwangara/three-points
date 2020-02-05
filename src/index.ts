@@ -4,7 +4,7 @@ import * as path from 'path';
 import { errorMiddleware } from './middleware/error';
 import connectDB from './models';
 import storeRoutes from './routes/stores';
-
+import { pointModelSeeder } from './utils/seeder';
 // Config
 dotenv.config({ path: path.resolve(__dirname, '../config/config.env') });
 
@@ -13,6 +13,9 @@ const app: Application = express();
 
 // Init DB
 connectDB();
+
+// seed DB
+// pointModelSeeder();
 
 // Routes
 app.use('/api/stores', storeRoutes);

@@ -9,8 +9,9 @@ import Point from '../models/Point';
 export async function getStores(req: Request, res: Response, next: NextFunction) {
   console.log(req.query);
   try {
-    const stores = await Point.find();
+    const stores = await Point.find().select('-_id');
     return res.status(200).json({
+      count: stores.length,
       success: true,
       data: stores,
     });
@@ -26,7 +27,7 @@ export async function getStores(req: Request, res: Response, next: NextFunction)
  */
 export async function getStore(req: Request, res: Response, next: NextFunction) {
   try {
-    const store = await Point.findOne({ id: req.params.id });
+    const store = await Point.findOne({ id: req.params.id }).select('-_id');
     return res.status(200).json(store);
   } catch (error) {
     return next(error);
