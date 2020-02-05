@@ -3,6 +3,9 @@ import { IPointModel } from '../interfaces/IPoint';
 import { segmentSchema } from './Segment';
 
 const pointSchema: mongoose.Schema<IPointModel> = new mongoose.Schema<IPointModel>({
+  _id: {
+    select: false,
+  },
   id: {
     type: String,
     required: [true, 'Id field is required'],

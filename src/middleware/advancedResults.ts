@@ -16,7 +16,7 @@ const getResults = (model: any, req: any) => {
   queryString = queryString.replace(/\b(gt|lt|in|gte|lte)\b/g, item => `$${item}`);
 
   // run query
-  query = (model as any).find(JSON.parse(queryString));
+  query = model.find(JSON.parse(queryString));
 
   // select query
   if (req.query.select) {
@@ -47,7 +47,7 @@ const advancedResults = (model: any, populate?: string | object) => async (
     const endIndex: number = page * limit;
     const total = await model.countDocuments();
 
-    let query = getResults(model, res);
+    let query = getResults(model, req);
     // pagination query
     query = query.skip(startIndex).limit(limit);
 
