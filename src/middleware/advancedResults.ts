@@ -35,7 +35,7 @@ const getResults = (model: any, req: any) => {
   return query;
 };
 
-const advancedResults = (model: IPointModel, populate?: string | object) => async (
+const advancedResults = (model: any, populate?: string | object) => async (
   req: Request,
   res: Response,
   next: NextFunction,
@@ -45,7 +45,7 @@ const advancedResults = (model: IPointModel, populate?: string | object) => asyn
     const limit: number = parseInt(req.query.limit, 10) || 10;
     const startIndex: number = (page - 1) * limit;
     const endIndex: number = page * limit;
-    const total = await (model as any).countDocuments();
+    const total = await model.countDocuments();
 
     let query = getResults(model, res);
     // pagination query

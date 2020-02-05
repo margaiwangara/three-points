@@ -1,11 +1,13 @@
 import { Router } from 'express';
 import { getStores, getStore, createStore, deleteStore, updateStore } from '../controllers/stores';
+import advancedResults from '../middleware/advancedResults';
+import Point from '../models/Point';
 
 const router = Router();
 
 router
   .route('/')
-  .get(getStores)
+  .get(advancedResults(Point), getStores)
   .post(createStore);
 
 router

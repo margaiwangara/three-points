@@ -51,6 +51,10 @@ const pointSchema: mongoose.Schema<IPointModel> = new mongoose.Schema<IPointMode
       default: false,
     },
   },
+  dateCreated: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 const Point: mongoose.Model<IPointModel> = mongoose.model<IPointModel>('Point', pointSchema, 'points');

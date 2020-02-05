@@ -1,5 +1,14 @@
 import { Request, Response, NextFunction } from 'express';
+import Graph from 'node-dijkstra';
 import Point from '../models/Point';
+
+const getShortestPath = (result: any) => {
+  const { data } = result;
+
+  // map over data to get navigation.segments
+  const segments: object[] | any = data.map((value: any) => value.navigation.segments);
+  console.log(segments);
+};
 
 /**
  * @desc Gets all stores from the database
@@ -7,14 +16,10 @@ import Point from '../models/Point';
  * @access Public
  */
 export async function getStores(req: Request, res: Response, next: NextFunction) {
-  console.log(req.query);
   try {
-    const stores = await Point.find().select('-_id -navigation.segments._id');
-    return res.status(200).json({
-      count: stores.length,
-      success: true,
-      data: stores,
-    });
+    const { advancedResults } = res as any;
+    getShortestPath(advancedResults);
+    return res.status(200).json(advancedResults);
   } catch (error) {
     return next(error);
   }
