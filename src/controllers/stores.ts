@@ -5,10 +5,6 @@ import Point from '../models/Point';
 const getShortestPath = (result: any, req: any) => {
   const data = result;
 
-  if (!req.query.from && !req.query.to) {
-    return [];
-  }
-
   const collection: object[] | any = [];
 
   // map over data to get navigation.segments
@@ -44,9 +40,15 @@ const getShortestPath = (result: any, req: any) => {
  */
 export async function getStores(req: Request, res: Response, next: NextFunction) {
   try {
-    const { advancedResults } = res as any;
+    // check if params exist
     const data = await Point.find();
-    console.log(getShortestPath(data, req));
+    if (req.query.from && req.query.to) {
+      return res.status(200).json({
+        success: true,
+        result: getShortestPath(data, req),
+      });
+    }
+    const { advancedResults } = res as any;
     return res.status(200).json(advancedResults);
   } catch (error) {
     return next(error);

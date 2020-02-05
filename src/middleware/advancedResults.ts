@@ -1,5 +1,4 @@
 import { Request, Response, NextFunction } from 'express';
-import { IPointModel } from '../interfaces/IPoint';
 
 const getResults = (model: any, req: any) => {
   // duplicate req.query
