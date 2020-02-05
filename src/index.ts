@@ -4,7 +4,8 @@ import * as path from 'path';
 import { errorMiddleware } from './middleware/error';
 import connectDB from './models';
 import storeRoutes from './routes/stores';
-import { pointModelSeeder } from './utils/seeder';
+// import { pointModelSeeder } from './utils/seeder';
+
 // Config
 dotenv.config({ path: path.resolve(__dirname, '../config/config.env') });
 

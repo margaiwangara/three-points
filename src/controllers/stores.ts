@@ -9,7 +9,7 @@ import Point from '../models/Point';
 export async function getStores(req: Request, res: Response, next: NextFunction) {
   console.log(req.query);
   try {
-    const stores = await Point.find().select('-_id');
+    const stores = await Point.find().select('-_id -navigation.segments._id');
     return res.status(200).json({
       count: stores.length,
       success: true,
