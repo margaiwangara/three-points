@@ -24,6 +24,8 @@
     "@typescript-eslint/no-console": "off",
     "func-names": "off",
     "@typescript-eslint/func-names": "off",
+    "no-plusplus": "off",
+    "@typescript-eslint/no-plusplus": "off",
     "import/extensions": [
       "error",
       {
