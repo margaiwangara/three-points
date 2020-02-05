@@ -2,12 +2,33 @@ import { Request, Response, NextFunction } from 'express';
 import Graph from 'node-dijkstra';
 import Point from '../models/Point';
 
-const getShortestPath = (result: any) => {
+const getShortestPath = (result: any, req: any) => {
   const { data } = result;
+  const { from = 'dd91c645-1301-447d-baf9-40de4649d57a', to = 'd20bd53e-361e-48fb-944f-dcdbf3e8defd' } = req.query;
+  const collection: object[] | any = [];
 
   // map over data to get navigation.segments
   const segments: object[] | any = data.map((value: any) => value.navigation.segments);
-  console.log(segments);
+  for (let i = 0; i < segments.length; i++) {
+    // move all data to a single collection
+    collection.push(...segments[i]);
+  }
+
+  // use collection with graph
+  const route = new Graph();
+  for (let i = 0; i < collection.length; i++) {
+    // assign values to node in graph
+    route.addNode(collection[i].id, { [collection[i + 1 < collection.length ? i + 1 : i].id]: collection[i].weight });
+  }
+
+  const routeResult: object | any = route.path(from, to, { cost: true });
+  const idWeightCombo = routeResult.path.map(
+    (id: string, index: number) => collection[index].id === id && [id, collection[index].weight],
+  );
+  return {
+    dist: routeResult.cost,
+    route: idWeightCombo,
+  };
 };
 
 /**
@@ -18,7 +39,7 @@ const getShortestPath = (result: any) => {
 export async function getStores(req: Request, res: Response, next: NextFunction) {
   try {
     const { advancedResults } = res as any;
-    getShortestPath(advancedResults);
+    console.log(getShortestPath(advancedResults, req));
     return res.status(200).json(advancedResults);
   } catch (error) {
     return next(error);
