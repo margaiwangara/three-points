@@ -3,8 +3,12 @@ import Graph from 'node-dijkstra';
 import Point from '../models/Point';
 
 const getShortestPath = (result: any, req: any) => {
-  const { data } = result;
-  const { from = 'dd91c645-1301-447d-baf9-40de4649d57a', to = 'd20bd53e-361e-48fb-944f-dcdbf3e8defd' } = req.query;
+  const data = result;
+
+  if (!req.query.from && !req.query.to) {
+    return [];
+  }
+
   const collection: object[] | any = [];
 
   // map over data to get navigation.segments
@@ -21,10 +25,12 @@ const getShortestPath = (result: any, req: any) => {
     route.addNode(collection[i].id, { [collection[i + 1 < collection.length ? i + 1 : i].id]: collection[i].weight });
   }
 
+  const { from, to } = req.query;
   const routeResult: object | any = route.path(from, to, { cost: true });
   const idWeightCombo = routeResult.path.map(
     (id: string, index: number) => collection[index].id === id && [id, collection[index].weight],
   );
+
   return {
     dist: routeResult.cost,
     route: idWeightCombo,
@@ -39,7 +45,8 @@ const getShortestPath = (result: any, req: any) => {
 export async function getStores(req: Request, res: Response, next: NextFunction) {
   try {
     const { advancedResults } = res as any;
-    console.log(getShortestPath(advancedResults, req));
+    const data = await Point.find();
+    console.log(getShortestPath(data, req));
     return res.status(200).json(advancedResults);
   } catch (error) {
     return next(error);
