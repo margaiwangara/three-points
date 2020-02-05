@@ -1,5 +1,4 @@
 import { Request, Response, NextFunction } from 'express';
-import Graph from 'node-dijkstra';
 import { IPointModel } from '../interfaces/IPoint';
 
 const getResults = (model: any, req: any) => {
@@ -89,10 +88,4 @@ const advancedResults = (model: IPointModel, populate?: string | object) => asyn
   }
 };
 
-// const route = new Graph();
-//   for (let i = 0; i < parsedData.length; i++) {
-//     route.addNode(parsedData[i].id, { [parsedData[i + 1 < parsedData.length ? i + 1 : i].id]: parsedData[i].weight });
-//   }
-
-//   console.log(route.path(from, to, { cost: true }));
 export default advancedResults;
