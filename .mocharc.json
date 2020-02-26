@@ -1,0 +1,6 @@
+{
+  "timeout": 10000,
+  "exit": true,
+  "extension": ["ts", "js"],
+  "watch-files": ["./src/test/*.ts", "./build/test/*.js"]
+}
